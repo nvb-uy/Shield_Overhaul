@@ -19,6 +19,9 @@
   "entrypoints": {
     "main": [
       "elocindev.shield_overhaul.ShieldOverhaul"
+    ],
+    "client": [
+      "elocindev.shield_overhaul.ShieldOverhaulClient"
     ]
   },
   "mixins": [

@@ -1,6 +1,7 @@
 package elocindev.shield_overhaul;
 
 import elocindev.shield_overhaul.registry.EffectRegistry;
+import elocindev.shield_overhaul.registry.EntityRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
