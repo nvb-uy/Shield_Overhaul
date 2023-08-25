@@ -2,6 +2,7 @@ package elocindev.shield_overhaul;
 
 import elocindev.shield_overhaul.registry.EffectRegistry;
 import elocindev.shield_overhaul.registry.EntityRegistry;
+import elocindev.shield_overhaul.registry.PacketRegistry;
 import net.fabricmc.api.ModInitializer;
 
 import org.slf4j.Logger;
@@ -22,6 +23,7 @@ public class ShieldOverhaul implements ModInitializer {
 		CONFIG = ConfigBuilder.loadConfig();
 
 		EffectRegistry.initEffects();
+		PacketRegistry.registerC2SPackets();
 		GeckoLib.initialize();
 	}
 }
