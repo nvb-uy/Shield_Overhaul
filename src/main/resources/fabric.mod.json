@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "id": "shield_overhaul",
+  "version": "1.0.0",
+
+  "name": "Shield Overhaul",
+  "description": "Overhauled mechanics for shields, adding shield bashing, parrying and more!",
+  "authors": [
+    "ElocinDev"
+  ],
+  "contact": {
+    "homepage": "https://curseforge.com/members/elocindev/projects",
+    "sources": "https://github.com/nvb-uy/Shield_Overhaul"
+  },
+  "icon":"icon.png",
+  "license": "AGNYA License",
+
+  "environment": "*",
+  "entrypoints": {
+    "main": [
+      "elocindev.shield_overhaul.ShieldOverhaul"
+    ]
+  },
+  "mixins": [
+    "shield_overhaul.mixins.json"
+  ],
+
+  "depends": {
+    "fabricloader": ">=0.14.19",
+    "java": ">=17",
+    "geckolib3": "*"
+  }
+}
