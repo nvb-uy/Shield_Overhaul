@@ -4,7 +4,8 @@
   "package": "elocindev.shield_overhaul.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
-    "ServerPlayerMixin"
+    "ServerPlayerMixin",
+    "BackgroundRendererMixin"
   ],
   "injectors": {
     "defaultRequire": 1
