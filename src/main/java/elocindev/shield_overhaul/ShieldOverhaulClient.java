@@ -14,7 +14,7 @@ public class ShieldOverhaulClient implements ClientModInitializer {
                 new ProjectileEntityRenderer<ShieldBashEntity>(context) {
                 @Override
                 public Identifier getTexture(ShieldBashEntity entity) {
-                    return null;
+                    return new Identifier(ShieldOverhaul.MODID, "textures/misc/shield_bash.png");
                 }
             });
         }
