@@ -11,6 +11,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
+import net.minecraft.util.math.Vec3d;
 import net.minecraft.world.World;
 
 public class ShieldBashEntity extends PersistentProjectileEntity {
@@ -32,6 +33,11 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
 
         ++this.life;
         if (this.life >= 3) {
+            if (this.getOwner() != null && !this.world.isClient()) {
+                LivingEntity entity = (LivingEntity) this.getOwner();
+                Vec3d vec3d = (new Vec3d(entity.getX() - this.getX(), entity.getY() - this.getY(), entity.getZ() - this.getZ())).multiply(0.1D);
+                entity.setVelocity(entity.getVelocity().add(vec3d));
+            }
             this.discard();
         }
     }
