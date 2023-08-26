@@ -5,7 +5,6 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.sound.SoundEvents;
 
 public class Immunity extends StatusEffect {
     public Immunity(StatusEffectCategory statusEffectCategory, int color) {
@@ -24,7 +23,6 @@ public class Immunity extends StatusEffect {
 
     @Override
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        entity.playSound(SoundEvents.BLOCK_ANVIL_DESTROY, 1, 1);
         super.onApplied(entity, attributes, amplifier);
     }
 }
