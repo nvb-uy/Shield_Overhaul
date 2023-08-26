@@ -71,7 +71,7 @@ dependencies {
 	//modImplementation "curse.maven:sodium-394468:3669187"
 	//modImplementation "curse.maven:iris-455508:3770305"
 
-	include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric-1.0.2")
+	include modImplementation("dev.kosmx.player-anim:player-animation-lib-fabric:1.0.2")
 
 	// Uncomment the following line to enable the deprecated Fabric API modules. 
 	// These are included in the Fabric API production distribution and allow you to update your mod to the latest modules at a later more convenient time.
