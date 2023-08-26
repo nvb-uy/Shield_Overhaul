@@ -1,16 +1,14 @@
 package elocindev.shield_overhaul.effect;
 
 import elocindev.shield_overhaul.ShieldOverhaul;
-import elocindev.shield_overhaul.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
-import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.sound.SoundEvents;
 
-public class StunEffect extends StatusEffect {
-    public StunEffect(StatusEffectCategory statusEffectCategory, int color) {
+public class Immunity extends StatusEffect {
+    public Immunity(StatusEffectCategory statusEffectCategory, int color) {
         super(statusEffectCategory, color);
     }
 
@@ -28,14 +26,5 @@ public class StunEffect extends StatusEffect {
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         entity.playSound(SoundEvents.BLOCK_ANVIL_DESTROY, 1, 1);
         super.onApplied(entity, attributes, amplifier);
-    }
-
-    @Override
-    public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        super.onRemoved(entity, attributes, amplifier);
-
-        if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && entity.canUsePortals()) {
-            entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN_IMMUNITY, 60, 0, false, false, true));
-        }
     }
 }
