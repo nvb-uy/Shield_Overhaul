@@ -13,7 +13,7 @@ public class ShieldBashC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
 
-        if (!player.getItemCooldownManager().isCoolingDown(player.getActiveItem().getItem()) && player.isBlocking()) {
+        if (!player.getItemCooldownManager().isCoolingDown(player.getActiveItem().getItem()) && player.isBlocking() && player.isOnGround()) {
             
                 ShieldBashEntity entity = new ShieldBashEntity(player, player.world);
                 entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
