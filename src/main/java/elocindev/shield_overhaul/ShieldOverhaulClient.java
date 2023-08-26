@@ -11,13 +11,6 @@ import net.minecraft.util.Identifier;
 public class ShieldOverhaulClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        EntityRendererRegistry.register(EntityRegistry.SHIELD_BASH_ENTITY, (context) ->
-                new ProjectileEntityRenderer<ShieldBashEntity>(context) {
-                @Override
-                public Identifier getTexture(ShieldBashEntity entity) {
-                    return new Identifier(ShieldOverhaul.MODID, "textures/misc/shield_bash.png");
-                }
-            });
         
         ShieldInteraction.bashingPacketRegistry();
     }
