@@ -1,5 +1,6 @@
 package elocindev.shield_overhaul.networking;
 
+import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.entity.ShieldBashEntity;
 import elocindev.shield_overhaul.util.MathUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
@@ -13,13 +14,14 @@ public class ShieldBashC2SPacket {
     public static void receive(MinecraftServer server, ServerPlayerEntity player, ServerPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
 
-        if (!player.getItemCooldownManager().isCoolingDown(player.getActiveItem().getItem()) && player.isBlocking() && player.isOnGround()) {
-            
+        if (!player.getItemCooldownManager().isCoolingDown(player.getActiveItem().getItem()) && player.isBlocking()) {
+                if (ShieldOverhaul.CONFIG.bash_only_on_ground && !player.isOnGround()) return;
+
                 ShieldBashEntity entity = new ShieldBashEntity(player, player.world);
                 entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
                 player.world.spawnEntity(entity);
 
-                Vec3d velocityVector = MathUtils.getLookingVec(player, 1.2f);
+                Vec3d velocityVector = MathUtils.getLookingVec(player, 1.5f);
                 player.addVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
                 player.velocityModified = true;
 

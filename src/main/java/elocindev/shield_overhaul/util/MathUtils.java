@@ -15,6 +15,6 @@ public class MathUtils {
         float m = MathHelper.sqrt(x * x + y * y + z * z);
         float n = 3.0F * ((1.0F) / 4.0F);
 
-        return new Vec3d(x*n/m, y*n/m, z*n/m);
+        return new Vec3d(x*n/m, y*n/m * 0.5F, z*n/m);
     }
 }

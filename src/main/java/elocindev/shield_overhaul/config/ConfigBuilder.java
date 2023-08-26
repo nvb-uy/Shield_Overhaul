@@ -24,6 +24,8 @@ public class ConfigBuilder {
 
                 exampleConfig.blacklisted_shields.add("// Items here will not use Shield Overhaul's mechanics");
                 exampleConfig.blacklisted_shields.add("examplemod:epic_shield");
+                exampleConfig.bosses_immune_to_stun = true;
+                exampleConfig.bash_only_on_ground = true;
 
                 String defaultJson = BUILDER.toJson(exampleConfig);
                 Files.writeString(file, defaultJson);
