@@ -2,7 +2,6 @@ package elocindev.shield_overhaul.entity;
 
 import elocindev.shield_overhaul.registry.EffectRegistry;
 import elocindev.shield_overhaul.registry.EntityRegistry;
-import net.minecraft.client.MinecraftClient;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -15,7 +14,7 @@ import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
 
 public class ShieldBashEntity extends PersistentProjectileEntity {
-    private int life;
+    private int life = 0;
 
     public ShieldBashEntity(EntityType<? extends PersistentProjectileEntity> entityType, World world) {
         super(entityType, world);
@@ -23,12 +22,16 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
 
     public ShieldBashEntity(LivingEntity owner, World world) {
         super(EntityRegistry.SHIELD_BASH_ENTITY, owner, world);
+        this.setNoGravity(true);
+        this.setDamage(0f);
     }
 
     @Override
-    protected void age() {
+    public void tick() {
+        super.tick();
+
         ++this.life;
-        if (this.life >= 20) {
+        if (this.life >= 3) {
             this.discard();
         }
     }
