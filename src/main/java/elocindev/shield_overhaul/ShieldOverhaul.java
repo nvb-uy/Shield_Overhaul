@@ -23,6 +23,5 @@ public class ShieldOverhaul implements ModInitializer {
 
 		EffectRegistry.initEffects();
 		PacketRegistry.registerC2SPackets();
-		GeckoLib.initialize();
 	}
 }
