@@ -1,6 +1,7 @@
 package elocindev.shield_overhaul.networking;
 
 import elocindev.shield_overhaul.entity.ShieldBashEntity;
+import elocindev.shield_overhaul.util.BashUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
@@ -16,6 +17,8 @@ public class ShieldBashC2SPacket {
                 ShieldBashEntity entity = new ShieldBashEntity(player, player.world);
                 entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
                 player.world.spawnEntity(entity);
+
+                BashUtils.doBash(player, 1);
 
                 player.getItemCooldownManager().set(player.getActiveItem().getItem(), 20);
         }
