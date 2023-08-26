@@ -45,11 +45,6 @@ repositories {
 	// for more information about repositories.
 
 	maven {
-		name = 'GeckoLib'
-		url 'https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/'
-	}
-
-	maven {
         url "https://cursemaven.com"
         content {
             includeGroup "curse.maven"
@@ -67,8 +62,6 @@ dependencies {
 	modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
 
 	modImplementation "curse.maven:continuity-531351:4441032"
-
-	modImplementation 'software.bernie.geckolib:geckolib-fabric-1.19:3.1.40'
 
 	//modImplementation "curse.maven:sodium-394468:3669187"
 	//modImplementation "curse.maven:iris-455508:3770305"
