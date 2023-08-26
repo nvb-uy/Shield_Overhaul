@@ -7,7 +7,6 @@ import net.minecraft.entity.attribute.AttributeContainer;
 import net.minecraft.entity.effect.StatusEffect;
 import net.minecraft.entity.effect.StatusEffectCategory;
 import net.minecraft.entity.effect.StatusEffectInstance;
-import net.minecraft.sound.SoundEvents;
 
 public class StunEffect extends StatusEffect {
     public StunEffect(StatusEffectCategory statusEffectCategory, int color) {
@@ -26,7 +25,7 @@ public class StunEffect extends StatusEffect {
 
     @Override
     public void onApplied(LivingEntity entity, AttributeContainer attributes, int amplifier) {
-        entity.playSound(SoundEvents.BLOCK_ANVIL_DESTROY, 1, 1);
+        if (entity.hasStatusEffect(EffectRegistry.STUN_IMMUNITY)) { entity.removeStatusEffect(EffectRegistry.STUN_EFFECT); return; }
         super.onApplied(entity, attributes, amplifier);
     }
 
@@ -34,7 +33,7 @@ public class StunEffect extends StatusEffect {
     public void onRemoved(LivingEntity entity, AttributeContainer attributes, int amplifier) {
         super.onRemoved(entity, attributes, amplifier);
 
-        if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && entity.canUsePortals()) {
+        if (ShieldOverhaul.CONFIG.add_stun_immunity && entity.canUsePortals() && !entity.hasStatusEffect(EffectRegistry.STUN_IMMUNITY)) {
             entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN_IMMUNITY, 60, 0, false, false, true));
         }
     }
