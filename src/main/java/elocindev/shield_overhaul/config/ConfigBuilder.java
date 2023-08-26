@@ -26,6 +26,10 @@ public class ConfigBuilder {
                 exampleConfig.blacklisted_shields.add("examplemod:epic_shield");
                 exampleConfig.bosses_immune_to_stun = true;
                 exampleConfig.bash_only_on_ground = true;
+                exampleConfig.bash_damage = 0.0F;
+                exampleConfig.bash_cooldown_secs = 2;
+                exampleConfig.bash_stun_duration_secs = 1;
+                exampleConfig.add_stun_immunity = true;
 
                 String defaultJson = BUILDER.toJson(exampleConfig);
                 Files.writeString(file, defaultJson);
