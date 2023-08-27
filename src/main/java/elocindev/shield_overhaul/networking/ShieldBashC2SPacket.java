@@ -2,9 +2,12 @@ package elocindev.shield_overhaul.networking;
 
 import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.entity.ShieldBashEntity;
+import elocindev.shield_overhaul.registry.PacketRegistry;
 import elocindev.shield_overhaul.util.MathUtils;
 import elocindev.shield_overhaul.util.ShieldAnimationUtils;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
@@ -23,7 +26,7 @@ public class ShieldBashC2SPacket {
                 entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
                 player.world.spawnEntity(entity);
 
-                ShieldAnimationUtils.playShieldBashAnimation(player);
+                ServerPlayNetworking.send(player, PacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create());
 
                 Vec3d velocityVector = MathUtils.getLookingVec(player, 1.5f);
                 player.addVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
