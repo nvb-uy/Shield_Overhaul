@@ -9,6 +9,6 @@ import net.minecraft.network.PacketByteBuf;
 public class ShieldBashAnimationS2CPacket {
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler,
                                PacketByteBuf buf, PacketSender responseSender) {
-        ShieldAnimationUtils.playShieldBashAnimation(client.player);
+        ShieldAnimationUtils.playShieldBashRight(client.player);
     }
 }

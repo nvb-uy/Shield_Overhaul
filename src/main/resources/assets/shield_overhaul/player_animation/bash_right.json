@@ -1,7 +1,7 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"bash": {
+		"bash_right": {
 			"animation_length": 1.25,
 			"bones": {
 				"head": {

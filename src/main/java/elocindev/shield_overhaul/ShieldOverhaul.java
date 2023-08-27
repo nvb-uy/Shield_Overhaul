@@ -22,5 +22,6 @@ public class ShieldOverhaul implements ModInitializer {
 
 		EffectRegistry.initEffects();
 		PacketRegistry.registerC2SPackets();
+		PacketRegistry.registerS2CPackets();
 	}
 }

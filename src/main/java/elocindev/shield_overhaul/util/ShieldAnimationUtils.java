@@ -8,9 +8,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class ShieldAnimationUtils {
-    public static void playShieldBashAnimation(PlayerEntity user) {
+    public static void playShieldBashRight(PlayerEntity user) {
         var animationContainer = ((IShieldAnimatedPlayer)user).shield_overhaul_getModAnimation();
-        KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, "bashRight"));
+        KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, "bash_right"));
         var builder = anim.mutableCopy();
         anim = builder.build();
         animationContainer.setAnimation(new KeyframeAnimationPlayer(anim));
