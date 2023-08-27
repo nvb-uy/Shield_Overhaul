@@ -4,7 +4,6 @@ import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.entity.ShieldBashEntity;
 import elocindev.shield_overhaul.registry.PacketRegistry;
 import elocindev.shield_overhaul.util.MathUtils;
-import elocindev.shield_overhaul.util.ShieldAnimationUtils;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
@@ -12,7 +11,6 @@ import net.minecraft.network.PacketByteBuf;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
-import net.minecraft.util.Identifier;
 import net.minecraft.util.math.Vec3d;
 
 public class ShieldBashC2SPacket {

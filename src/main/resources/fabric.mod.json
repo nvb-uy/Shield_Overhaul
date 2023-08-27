@@ -30,7 +30,6 @@
 
   "depends": {
     "fabricloader": ">=0.14.19",
-    "java": ">=17",
-    "geckolib3": "*"
+    "java": ">=17"
   }
 }
