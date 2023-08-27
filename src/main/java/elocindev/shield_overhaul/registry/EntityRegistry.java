@@ -15,7 +15,7 @@ public class EntityRegistry {
     public static final EntityType<ShieldBashEntity> SHIELD_BASH_ENTITY = Registry.register(
     Registry.ENTITY_TYPE, new Identifier(ShieldOverhaul.MODID, "shield_bash_entity"),
     FabricEntityTypeBuilder.<ShieldBashEntity>create(SpawnGroup.MISC, elocindev.shield_overhaul.entity.ShieldBashEntity::new)
-            .dimensions(EntityDimensions.fixed(1F, 1F)).trackRangeBlocks(4).trackedUpdateRate(10).build());
+            .dimensions(EntityDimensions.fixed(2F, 2F)).trackRangeBlocks(4).trackedUpdateRate(10).build());
 
 
     public static void registerRenderers() {
