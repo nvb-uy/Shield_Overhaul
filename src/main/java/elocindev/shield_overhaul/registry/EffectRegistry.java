@@ -14,5 +14,6 @@ public class EffectRegistry {
 
     public static void initEffects() {
         Registry.register(Registry.STATUS_EFFECT, new Identifier(ShieldOverhaul.MODID, "stun"), STUN_EFFECT);
+        Registry.register(Registry.STATUS_EFFECT, new Identifier(ShieldOverhaul.MODID, "immunity"), STUN_IMMUNITY);
     }
 }
