@@ -5,6 +5,8 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import elocindev.shield_overhaul.ShieldOverhaul;
+import elocindev.shield_overhaul.config.ConfigEntries;
 import elocindev.shield_overhaul.util.ShieldUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
@@ -21,14 +23,18 @@ public class ServerPlayerInteractionManagerMixin {
     public void interactItem(ServerPlayerEntity player, World world, ItemStack stack, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
         Hand shieldHand = player.getActiveHand();
         ItemStack shield = player.getStackInHand(shieldHand);
+        ConfigEntries config = ShieldOverhaul.CONFIG;
         
-        if (shield.getItem() instanceof ShieldItem && !player.getItemCooldownManager().isCoolingDown(shield.getItem())) {
+        if (config.enable_parrying && shield.getItem() instanceof ShieldItem && !player.getItemCooldownManager().isCoolingDown(shield.getItem())) {
             if (ShieldUtils.isParrying(stack, world)) {
                 // This will reset the parry if the player happens to use the shield why the parry window is active
                 // To prevent spam clicking for permanent parry
                 ShieldUtils.resetParryWindow(stack);
+                if (config.enable_parry_abuse_prevention) {
+                    player.getItemCooldownManager().set(stack.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
+                }
             } else {
-                ShieldUtils.setParryWindow(stack, world, 10);;
+                ShieldUtils.setParryWindow(stack, world, (int)(config.parry_window_secs * 20));
             }
         }
     }
