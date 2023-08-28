@@ -1,7 +1,9 @@
 package elocindev.shield_overhaul.util;
 
 import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
+import dev.kosmx.playerAnim.api.layered.modifier.AbstractFadeModifier;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
+import dev.kosmx.playerAnim.core.util.Ease;
 import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationRegistry;
 import elocindev.shield_overhaul.ShieldOverhaul;
 import net.minecraft.entity.player.PlayerEntity;
@@ -14,6 +16,6 @@ public class ShieldAnimationUtils {
         var builder = anim.mutableCopy();
         anim = builder.build();
         animationContainer.setAnimation(new KeyframeAnimationPlayer(anim));
-        //Use animationContainer.replaceAnimationWithFade(); to create fading effects instead of sudden changes.
+        animationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.CONSTANT), null);
     }
 }
