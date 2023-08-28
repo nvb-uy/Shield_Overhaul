@@ -30,6 +30,9 @@ public class ConfigBuilder {
                 exampleConfig.bash_cooldown_secs = 2;
                 exampleConfig.bash_stun_duration_secs = 1;
                 exampleConfig.add_stun_immunity = true;
+                exampleConfig.enable_parrying = true;
+                exampleConfig.enable_parry_abuse_prevention = true;
+                exampleConfig.parry_window_secs = 0.5F; 
 
                 String defaultJson = BUILDER.toJson(exampleConfig);
                 Files.writeString(file, defaultJson);
