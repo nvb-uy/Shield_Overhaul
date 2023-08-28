@@ -21,6 +21,9 @@ public class StunEffect extends StatusEffect {
     @Override
     public void applyUpdateEffect(LivingEntity entity, int amplifier) {
         if (ShieldOverhaul.CONFIG.bosses_immune_to_stun && !entity.canUsePortals()) entity.removeStatusEffect(this);
+
+        entity.setVelocity(0, entity.getVelocity().y < 0 ? entity.getVelocity().y : 0, 0);
+        entity.velocityModified = true;
     }
 
     @Override
