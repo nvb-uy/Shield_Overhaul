@@ -6,7 +6,8 @@
   "mixins": [
     "ServerPlayerMixin",
     "BackgroundRendererMixin",
-    "ClientPlayerEntityMixin"
+    "ClientPlayerEntityMixin",
+    "ServerPlayerInteractionManagerMixin"
   ],
   "injectors": {
     "defaultRequire": 1
