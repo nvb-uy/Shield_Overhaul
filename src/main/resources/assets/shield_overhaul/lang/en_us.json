@@ -1,0 +1,6 @@
+{
+    "effect.shield_overhaul.stun":"Stun",
+    "effect.shield_overhaul.stun.description":"Target is unable to move, use items or attack.",
+    "effect.shield_overhaul.stun_immunity":"Stun Immunity",
+    "effect.shield_overhaul.stun_immunity.description":"Target is immune to getting stunned."
+}
