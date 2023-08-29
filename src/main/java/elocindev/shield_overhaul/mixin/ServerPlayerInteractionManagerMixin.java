@@ -7,6 +7,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.config.ConfigEntries;
+import elocindev.shield_overhaul.registry.EffectRegistry;
 import elocindev.shield_overhaul.util.ShieldUtils;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
@@ -21,6 +22,10 @@ public class ServerPlayerInteractionManagerMixin {
     
     @Inject(method = "interactItem", at = @At("HEAD"), cancellable = true)
     public void interactItem(ServerPlayerEntity player, World world, ItemStack stack, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+        if (player.hasStatusEffect(EffectRegistry.STUN_EFFECT)) {
+            cir.setReturnValue(ActionResult.FAIL);
+        }
+
         Hand shieldHand = player.getActiveHand();
         ItemStack shield = player.getStackInHand(shieldHand);
         ConfigEntries config = ShieldOverhaul.CONFIG;
