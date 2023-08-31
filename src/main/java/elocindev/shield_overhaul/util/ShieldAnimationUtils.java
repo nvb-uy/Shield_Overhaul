@@ -1,5 +1,6 @@
 package elocindev.shield_overhaul.util;
 
+import dev.kosmx.playerAnim.api.firstPerson.FirstPersonMode;
 import dev.kosmx.playerAnim.api.layered.KeyframeAnimationPlayer;
 import dev.kosmx.playerAnim.api.layered.modifier.AbstractFadeModifier;
 import dev.kosmx.playerAnim.core.data.KeyframeAnimation;
@@ -15,7 +16,7 @@ public class ShieldAnimationUtils {
         KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, "bash_right"));
         var builder = anim.mutableCopy();
         anim = builder.build();
-        animationContainer.setAnimation(new KeyframeAnimationPlayer(anim));
+        animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.VANILLA));
         animationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(5, Ease.CONSTANT), null);
     }
 }
