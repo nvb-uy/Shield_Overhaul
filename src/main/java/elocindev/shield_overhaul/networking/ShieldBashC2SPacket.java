@@ -13,6 +13,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.network.ServerPlayNetworkHandler;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.Hand;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.util.math.Vec3d;
 
@@ -27,8 +28,10 @@ public class ShieldBashC2SPacket {
                 entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
                 player.world.spawnEntity(entity);
 
+                Hand activeHand = player.getActiveHand();
+
                 for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)player.getWorld(), new ChunkPos((int)player.getPos().x / 16, (int)player.getPos().z / 16))) {
-                    ServerPlayNetworking.send(target, PacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString("right"));
+                    ServerPlayNetworking.send(target, PacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString(activeHand == Hand.MAIN_HAND ? "right" : "left"));
                 }
     
                 Vec3d velocityVector = MathUtils.getLookingVec(player, 1.5f);
