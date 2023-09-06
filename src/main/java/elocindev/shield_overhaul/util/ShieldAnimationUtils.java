@@ -11,9 +11,9 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class ShieldAnimationUtils {
-    public static void playShieldBashRight(PlayerEntity user) {
+    public static void playShieldBash(PlayerEntity user, String side) {
         var animationContainer = ((IShieldAnimatedPlayer)user).shield_overhaul_getModAnimation();
-        KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, "bash_right"));
+        KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, side.equals("right") ? "bash_right" : "bash_left"));
         var builder = anim.mutableCopy();
         anim = builder.build();
         animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.VANILLA));

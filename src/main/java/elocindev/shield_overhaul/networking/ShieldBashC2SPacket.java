@@ -28,7 +28,7 @@ public class ShieldBashC2SPacket {
                 player.world.spawnEntity(entity);
 
                 for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)player.getWorld(), new ChunkPos((int)player.getPos().x / 16, (int)player.getPos().z / 16))) {
-                    ServerPlayNetworking.send(target, PacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()));
+                    ServerPlayNetworking.send(target, PacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString("right"));
                 }
     
                 Vec3d velocityVector = MathUtils.getLookingVec(player, 1.5f);
