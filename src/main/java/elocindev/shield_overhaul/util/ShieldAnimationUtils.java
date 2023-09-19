@@ -13,7 +13,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.util.Identifier;
 
 public class ShieldAnimationUtils {
-    private static SpeedModifier SPEED = new SpeedModifier(2);
+    private static SpeedModifier SPEED = new SpeedModifier(4);
 
     public static void playShieldBash(PlayerEntity user, String side) {
         var animationContainer = ((IShieldAnimatedPlayer)user).shield_overhaul_getModAnimation();
