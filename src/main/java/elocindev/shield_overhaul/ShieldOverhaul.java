@@ -16,6 +16,7 @@ public class ShieldOverhaul implements ModInitializer {
 
 	public static ConfigEntries CONFIG;
 
+	// 1.20.1 branch!
 	@Override
 	public void onInitialize() {
 		CONFIG = ConfigBuilder.loadConfig();
