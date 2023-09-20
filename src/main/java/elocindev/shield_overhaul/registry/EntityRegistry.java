@@ -8,12 +8,13 @@ import net.minecraft.client.render.entity.ProjectileEntityRenderer;
 import net.minecraft.entity.EntityDimensions;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.SpawnGroup;
+import net.minecraft.registry.Registries;
+import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
-import net.minecraft.util.registry.Registry;
 
 public class EntityRegistry {
     public static final EntityType<ShieldBashEntity> SHIELD_BASH_ENTITY = Registry.register(
-    Registry.ENTITY_TYPE, new Identifier(ShieldOverhaul.MODID, "shield_bash_entity"),
+    Registries.ENTITY_TYPE, new Identifier(ShieldOverhaul.MODID, "shield_bash_entity"),
     FabricEntityTypeBuilder.<ShieldBashEntity>create(SpawnGroup.MISC, elocindev.shield_overhaul.entity.ShieldBashEntity::new)
             .dimensions(EntityDimensions.fixed(2F, 2F)).trackRangeBlocks(4).trackedUpdateRate(10).build());
 

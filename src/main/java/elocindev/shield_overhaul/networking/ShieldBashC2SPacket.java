@@ -24,9 +24,9 @@ public class ShieldBashC2SPacket {
         if (!player.getItemCooldownManager().isCoolingDown(player.getActiveItem().getItem()) && player.isBlocking()) {
                 if (ShieldOverhaul.CONFIG.bash_only_on_ground && !player.isOnGround()) return;
 
-                ShieldBashEntity entity = new ShieldBashEntity(player, player.world);
+                ShieldBashEntity entity = new ShieldBashEntity(player, player.getWorld());
                 entity.setVelocity(player, player.getPitch(), player.getYaw(), 0.0F, 2.0F, 0F);
-                player.world.spawnEntity(entity);
+                player.getWorld().spawnEntity(entity);
 
                 Hand activeHand = player.getActiveHand();
 

@@ -11,7 +11,7 @@ public class ShieldUtils {
     public static boolean isParrying(PlayerEntity player) {
         if (!(player.getActiveItem().getItem() instanceof ShieldItem)) return false;
         
-        return isParrying(player.getActiveItem(), player.world);
+        return isParrying(player.getActiveItem(), player.getWorld());
     }
 
     public static boolean isParrying(ItemStack stack, World world) {

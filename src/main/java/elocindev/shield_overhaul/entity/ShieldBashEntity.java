@@ -41,7 +41,7 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
     @Override
     protected void onEntityHit(EntityHitResult entityHitResult) {
         super.onEntityHit(entityHitResult);
-        if (entityHitResult.getEntity() instanceof LivingEntity entity && !entity.world.isClient()) {
+        if (entityHitResult.getEntity() instanceof LivingEntity entity && !entity.getWorld().isClient()) {
             entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN_EFFECT, 20, 0, false, false, true));
             entity.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1, 0.8F);
             this.setRemoved(RemovalReason.DISCARDED); 
@@ -56,10 +56,13 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
         return null;
     }
 
+    /*
     @Override
     protected SoundEvent getHitSound() {
         return new SoundEvent(new Identifier("null"));
     }
+
+     */
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
