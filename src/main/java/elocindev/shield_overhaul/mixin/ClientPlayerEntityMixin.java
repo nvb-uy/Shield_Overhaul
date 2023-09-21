@@ -8,7 +8,6 @@ import dev.kosmx.playerAnim.minecraftApi.PlayerAnimationAccess;
 import elocindev.shield_overhaul.util.IShieldAnimatedPlayer;
 import net.minecraft.client.network.AbstractClientPlayerEntity;
 import net.minecraft.client.world.ClientWorld;
-import net.minecraft.network.encryption.PlayerPublicKey;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Unique;
 import org.spongepowered.asm.mixin.injection.At;
