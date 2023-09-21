@@ -22,6 +22,7 @@ public class ConfigBuilder {
             if (Files.notExists(file)) {
                 ConfigEntries exampleConfig = new ConfigEntries();
 
+                exampleConfig.enable_instant_shield_use = true;
                 exampleConfig.blacklisted_shields.add("// Items here will not use Shield Overhaul's mechanics");
                 exampleConfig.blacklisted_shields.add("examplemod:epic_shield");
                 exampleConfig.bosses_immune_to_stun = true;
