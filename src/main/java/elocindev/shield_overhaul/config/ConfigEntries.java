@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConfigEntries {
+  public boolean enable_instant_shield_use = true;
   public List<String> blacklisted_shields = new ArrayList<>();
   public boolean bosses_immune_to_stun = true;
   public boolean bash_only_on_ground = true;

@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "shield_overhaul",
-  "version": "1.0.0",
+  "version": "1.0.1",
 
   "name": "Shield Overhaul",
   "description": "Overhauled mechanics for shields, adding shield bashing, parrying and more!",

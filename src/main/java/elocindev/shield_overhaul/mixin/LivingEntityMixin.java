@@ -2,9 +2,12 @@ package elocindev.shield_overhaul.mixin;
 
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Constant;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyConstant;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.registry.EffectRegistry;
 import net.minecraft.entity.LivingEntity;
 
@@ -17,5 +20,11 @@ public class LivingEntityMixin {
         if(entity.hasStatusEffect(EffectRegistry.STUN_EFFECT)) {
             cir.setReturnValue(true);;
         }
+    }
+
+    // Credits to https://github.com/Quplet/NoShieldDelay (MIT Licensed)
+    @ModifyConstant(method = "isBlocking", constant = @Constant(intValue = 5))
+    private int setShieldUseDelay(int constant) {
+        return ShieldOverhaul.CONFIG.enable_instant_shield_use ? 0 : constant;
     }
 }
