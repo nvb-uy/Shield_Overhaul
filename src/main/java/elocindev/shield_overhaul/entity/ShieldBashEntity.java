@@ -8,7 +8,9 @@ import net.minecraft.entity.effect.StatusEffectInstance;
 import net.minecraft.entity.projectile.ArrowEntity;
 import net.minecraft.entity.projectile.PersistentProjectileEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.world.World;
@@ -54,13 +56,10 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
         return null;
     }
 
-    /*
     @Override
     protected SoundEvent getHitSound() {
-        return new SoundEvent(new Identifier("null"));
+        return SoundEvent.of(new Identifier("null"));
     }
-
-     */
 
     @Override
     protected void onBlockHit(BlockHitResult blockHitResult) {
