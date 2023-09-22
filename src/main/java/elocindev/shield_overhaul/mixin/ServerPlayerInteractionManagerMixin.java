@@ -16,6 +16,7 @@ import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
+import net.minecraft.registry.Registries;
 
 @Mixin(ServerPlayerInteractionManager.class)
 public class ServerPlayerInteractionManagerMixin {
@@ -28,18 +29,23 @@ public class ServerPlayerInteractionManagerMixin {
 
         Hand shieldHand = player.getActiveHand();
         ItemStack shield = player.getStackInHand(shieldHand);
+        
         ConfigEntries config = ShieldOverhaul.CONFIG;
         
-        if (config.enable_parrying && shield.getItem() instanceof ShieldItem && !player.getItemCooldownManager().isCoolingDown(shield.getItem())) {
-            if (ShieldUtils.isParrying(stack, world)) {
+        if (config.enable_parrying && (shield.getItem() instanceof ShieldItem) && !player.getItemCooldownManager().isCoolingDown(shield.getItem())) {
+            if (config.blacklisted_shields.contains(Registries.ITEM.getId(shield.getItem()).toString()))
+                return;
+                
+            if (ShieldUtils.isParrying(shield, world)) {
+                
                 // This will reset the parry if the player happens to use the shield why the parry window is active
                 // To prevent spam clicking for permanent parry
-                ShieldUtils.resetParryWindow(stack);
+                ShieldUtils.resetParryWindow(shield);
                 if (config.enable_parry_abuse_prevention) {
                     player.getItemCooldownManager().set(stack.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
                 }
             } else {
-                ShieldUtils.setParryWindow(stack, world, (int)(config.parry_window_secs * 20));
+                ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 20));
             }
         }
     }
