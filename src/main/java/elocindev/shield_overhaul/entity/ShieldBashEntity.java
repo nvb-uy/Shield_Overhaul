@@ -45,7 +45,7 @@ public class ShieldBashEntity extends PersistentProjectileEntity {
             entity.addStatusEffect(new StatusEffectInstance(EffectRegistry.STUN_EFFECT, 20, 0, false, false, true));
             entity.playSound(SoundEvents.ITEM_SHIELD_BLOCK, 1, 0.8F);
             this.setRemoved(RemovalReason.DISCARDED); 
-        } else if (entityHitResult.getEntity() instanceof ArrowEntity arrow) {
+        } else if (entityHitResult.getEntity() instanceof ArrowEntity arrow && !arrow.getWorld().isClient()) {
             arrow.setVelocity(arrow.getVelocity().multiply(-1));
             arrow.velocityModified = true;
         }

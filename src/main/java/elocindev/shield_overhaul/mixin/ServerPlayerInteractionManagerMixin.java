@@ -42,7 +42,7 @@ public class ServerPlayerInteractionManagerMixin {
                 // To prevent spam clicking for permanent parry
                 ShieldUtils.resetParryWindow(shield);
                 if (config.enable_parry_abuse_prevention) {
-                    player.getItemCooldownManager().set(stack.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
+                    player.getItemCooldownManager().set(shield.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
                 }
             } else {
                 ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 20));

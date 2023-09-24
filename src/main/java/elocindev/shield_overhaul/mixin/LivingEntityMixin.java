@@ -25,6 +25,6 @@ public class LivingEntityMixin {
     // Credits to https://github.com/Quplet/NoShieldDelay (MIT Licensed)
     @ModifyConstant(method = "isBlocking", constant = @Constant(intValue = 5))
     private int setShieldUseDelay(int constant) {
-        return ShieldOverhaul.CONFIG.enable_instant_shield_use ? 0 : constant;
+        return ShieldOverhaul.CONFIG.enable_instant_shield_use ? 1 : constant;
     }
 }

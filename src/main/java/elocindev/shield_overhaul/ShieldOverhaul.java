@@ -1,6 +1,7 @@
 package elocindev.shield_overhaul;
 
 import elocindev.shield_overhaul.registry.EffectRegistry;
+import elocindev.shield_overhaul.registry.EntityRegistry;
 import elocindev.shield_overhaul.registry.ServerPacketRegistry;
 import net.fabricmc.api.ModInitializer;
 
@@ -22,6 +23,7 @@ public class ShieldOverhaul implements ModInitializer {
 		CONFIG = ConfigBuilder.loadConfig();
 
 		EffectRegistry.initEffects();
+		EntityRegistry.reg();
 		ServerPacketRegistry.registerC2SPackets();
 	}
 }
