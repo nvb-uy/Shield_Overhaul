@@ -27,6 +27,8 @@ public class ServerPlayerInteractionManagerMixin {
             cir.setReturnValue(ActionResult.FAIL);
         }
 
+        ShieldOverhaul.LOGGER.info("YUH");
+
         Hand shieldHand = player.getActiveHand();
         ItemStack shield = player.getStackInHand(shieldHand);
         

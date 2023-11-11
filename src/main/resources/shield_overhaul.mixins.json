@@ -4,6 +4,7 @@
   "package": "elocindev.shield_overhaul.mixin",
   "compatibilityLevel": "JAVA_17",
   "mixins": [
+    "CursorIconMixin",
     "LivingEntityMixin",
     "BackgroundRendererMixin",
     "ClientPlayerEntityMixin",
