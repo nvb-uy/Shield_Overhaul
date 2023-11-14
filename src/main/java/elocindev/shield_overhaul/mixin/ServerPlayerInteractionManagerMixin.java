@@ -46,7 +46,7 @@ public class ServerPlayerInteractionManagerMixin {
                     player.getItemCooldownManager().set(shield.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
                 }
             } else {
-                ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 40));
+                ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 20));
             }
         }
     }
