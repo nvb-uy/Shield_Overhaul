@@ -34,7 +34,7 @@ public class CursorIconMixin {
     @Inject(at = @At("TAIL"), method = "renderCrosshair")
     private void $shield_overhaul_renderHotbar(DrawContext context, CallbackInfo ci) {
         RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
-        if (this.client.options.getAttackIndicator().getValue() == AttackIndicator.CROSSHAIR) {
+        if (this.client.options.getAttackIndicator().getValue() == AttackIndicator.CROSSHAIR && this.client.player.isHolding(Items.SHIELD)) {
             float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
             boolean bl = false;
             if (this.client.targetedEntity != null && this.client.targetedEntity instanceof LivingEntity && f >= 1.0F) {
