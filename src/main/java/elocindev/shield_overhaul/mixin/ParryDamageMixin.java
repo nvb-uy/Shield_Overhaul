@@ -31,7 +31,7 @@ public class ParryDamageMixin {
         float damageReduction = Math.max(0, Math.min(1, (window/config.parry_abuse_cooldown_secs)/100));
         playerEntity.sendMessage(Text.literal("parry damage reduction: "+ String.valueOf(damageReduction)));
 
-        if (isParrying) {
+        if (isParrying && damageReduction >= 0.8) {
             cir.cancel();
         }
     }

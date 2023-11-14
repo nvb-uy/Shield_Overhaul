@@ -18,7 +18,7 @@ public class ShieldAnimationUtils {
         var builder = anim.mutableCopy();
         anim = builder.build();
         animationContainer.addModifierLast(SPEED);
-        animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.VANILLA));
+        animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL));
         //animationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(0, Ease.CONSTANT), null);
     }
 }
