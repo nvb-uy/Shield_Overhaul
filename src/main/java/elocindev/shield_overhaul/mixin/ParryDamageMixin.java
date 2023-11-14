@@ -1,5 +1,7 @@
 package elocindev.shield_overhaul.mixin;
 
+import elocindev.shield_overhaul.ShieldOverhaul;
+import elocindev.shield_overhaul.config.ConfigEntries;
 import elocindev.shield_overhaul.util.ShieldUtils;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.damage.DamageSource;
@@ -16,20 +18,19 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public class ParryDamageMixin {
     private static String key = "parry_window";
+    ConfigEntries config = ShieldOverhaul.CONFIG;
 
-    // stack.getNbt().getLong(key)
-    // ||
     @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void $shield_overhaul_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
-
         if (!(((LivingEntity) (Object) this) instanceof PlayerEntity playerEntity) || !(playerEntity.getStackInHand(playerEntity.getActiveHand()).getItem() instanceof ShieldItem)) return;
+
         ItemStack shield = playerEntity.getStackInHand(playerEntity.getActiveHand());
-
-        playerEntity.sendMessage(Text.literal("parry window: "+ String.valueOf(shield.getNbt().getLong(key))));
-        playerEntity.sendMessage(Text.literal(String.valueOf("time: " + playerEntity.getWorld().getTime())));
-
-        playerEntity.sendMessage(Text.literal(String.valueOf("isParrying: " + String.valueOf(ShieldUtils.isParrying(shield, playerEntity.getWorld())))));
         boolean isParrying = ShieldUtils.isParrying(shield, playerEntity.getWorld());
+        long window = (shield.getNbt().getLong(key) - playerEntity.getWorld().getTime());
+
+        float damageReduction = Math.max(0, Math.min(1, (window/config.parry_abuse_cooldown_secs)/100));
+        playerEntity.sendMessage(Text.literal("parry damage reduction: "+ String.valueOf(damageReduction)));
+
         if (isParrying) {
             cir.cancel();
         }
