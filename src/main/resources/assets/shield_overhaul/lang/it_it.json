@@ -1,0 +1,6 @@
+{
+    "effect.shield_overhaul.stun":"Stordimento",
+    "effect.shield_overhaul.stun.description":"Il bersaglio non può muoversi, usare oggetti o attaccare.",
+    "effect.shield_overhaul.immunity":"Robustezza",
+    "effect.shield_overhaul.immunity.description":"Il bersaglio è immune allo stordimento."
+}
