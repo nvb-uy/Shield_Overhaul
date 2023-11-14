@@ -39,7 +39,6 @@ public class ServerPlayerInteractionManagerMixin {
                 return;
                 
             if (ShieldUtils.isParrying(shield, world)) {
-                
                 // This will reset the parry if the player happens to use the shield why the parry window is active
                 // To prevent spam clicking for permanent parry
                 ShieldUtils.resetParryWindow(shield);
@@ -47,7 +46,7 @@ public class ServerPlayerInteractionManagerMixin {
                     player.getItemCooldownManager().set(shield.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
                 }
             } else {
-                ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 20));
+                ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 40));
             }
         }
     }
