@@ -25,8 +25,6 @@ public class ParryDamageMixin {
     private static String key = "parry_window";
     ConfigEntries config = ShieldOverhaul.CONFIG;
 
-
-
     @Inject(method = "modifyAppliedDamage", at = @At("HEAD"), cancellable = true)
     public void $shield_overhaul_damage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         if (!(((LivingEntity) (Object) this) instanceof PlayerEntity playerEntity) || !(playerEntity.getStackInHand(playerEntity.getActiveHand()).getItem() instanceof ShieldItem)) return;
@@ -49,12 +47,14 @@ public class ParryDamageMixin {
             cir.setReturnValue(amount);
         } else {
             int i;
+            float initialAmount = amount;
             if (!((LivingEntity) (Object) this).hasStatusEffect(StatusEffects.RESISTANCE) && !source.isIn(DamageTypeTags.BYPASSES_RESISTANCE)) {
                 // i = percentage from 0-100 of resistance
                 // formula = amplifier * 5, eg 1*5 all the way to 5*5 and then is taken away
                 // if j = 0, then 0 damage is applied, meaning if j is 1 then theoretically all damage should be applied.
 
                 // j becomes 0, which I assume is the damage applied
+
                 float j = damageReduction * 100;
                 float f = amount * (float)j;
                 float g = amount;
@@ -79,11 +79,16 @@ public class ParryDamageMixin {
                     amount = DamageUtil.getInflictedDamage(amount, (float)i);
                 }
 
+                /* This is for testing purposes
                 if (((LivingEntity) (Object) this) instanceof PlayerEntity playerEntity) {
                     playerEntity.sendMessage(Text.literal("amount: "+ String.valueOf(amount)));
+                    playerEntity.sendMessage(Text.literal("initialAmount: "+ String.valueOf(initialAmount)));
+                    playerEntity.sendMessage(Text.literal("initialAmount - amount: "+ String.valueOf(initialAmount-amount)));
+                    playerEntity.sendMessage(Text.literal(""));
                 }
+                 */
 
-                cir.setReturnValue(amount);
+                cir.setReturnValue(initialAmount - amount);
             }
         }
     }
