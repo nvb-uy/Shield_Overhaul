@@ -34,10 +34,8 @@ public class ParryDamageMixin {
         long window = (shield.getNbt().getLong(key) - playerEntity.getWorld().getTime());
 
         float damageReduction = Math.max(0, Math.min(1, (window/config.parry_abuse_cooldown_secs)/100));
-        playerEntity.sendMessage(Text.literal("parry damage reduction: "+ String.valueOf(damageReduction)));
 
         if (isParrying && damageReduction > 0) {
-            //cir.cancel();
             parryDamageLogic(source, amount, damageReduction, cir);
         }
     }
@@ -78,15 +76,6 @@ public class ParryDamageMixin {
                 if (i > 0) {
                     amount = DamageUtil.getInflictedDamage(amount, (float)i);
                 }
-
-                /* This is for testing purposes
-                if (((LivingEntity) (Object) this) instanceof PlayerEntity playerEntity) {
-                    playerEntity.sendMessage(Text.literal("amount: "+ String.valueOf(amount)));
-                    playerEntity.sendMessage(Text.literal("initialAmount: "+ String.valueOf(initialAmount)));
-                    playerEntity.sendMessage(Text.literal("initialAmount - amount: "+ String.valueOf(initialAmount-amount)));
-                    playerEntity.sendMessage(Text.literal(""));
-                }
-                 */
 
                 cir.setReturnValue(initialAmount - amount);
             }

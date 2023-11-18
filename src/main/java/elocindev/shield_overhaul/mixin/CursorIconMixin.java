@@ -46,11 +46,33 @@ public class CursorIconMixin {
             int k = this.scaledWidth / 2 - 8;
 
             if (bl) {
-                context.drawTexture(ICONS, k - 16, j - 16, 68, 94, 16, 16);
+                context.drawTexture(ICONS, k - 16, j - 14, 68, 94, 16, 16);
             } else if (f < 1.0F) {
                 int l = (int)(f * 17.0F);
-                context.drawTexture(ICONS, k - 16, j - 16, 36, 94, 16, 4);
-                context.drawTexture(ICONS, k - 16, j - 16, 52, 94, l, 4);
+                context.drawTexture(ICONS, k - 16, j - 14, 36, 94, 16, 4);
+                context.drawTexture(ICONS, k - 16, j - 14, 52, 94, l, 4);
+            }
+        }
+        RenderSystem.defaultBlendFunc();
+
+        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+        if (this.client.options.getAttackIndicator().getValue() == AttackIndicator.CROSSHAIR && this.client.player.isHolding(Items.SHIELD)) {
+            float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
+            boolean bl = false;
+            if (this.client.targetedEntity != null && this.client.targetedEntity instanceof LivingEntity && f >= 1.0F) {
+                bl = this.client.player.getAttackCooldownProgressPerTick() > 5.0F;
+                bl &= this.client.targetedEntity.isAlive();
+            }
+
+            int j = this.scaledHeight / 2 - 7 + 16;
+            int k = this.scaledWidth / 2 - 8;
+
+            if (bl) {
+                context.drawTexture(ICONS, k - 16, j - 7, 68, 94, 16, 16);
+            } else if (f < 1.0F) {
+                int l = (int)(f * 17.0F);
+                context.drawTexture(ICONS, k - 16, j - 7, 36, 94, 16, 4);
+                context.drawTexture(ICONS, k - 16, j - 7, 52, 94, l, 4);
             }
         }
         RenderSystem.defaultBlendFunc();
