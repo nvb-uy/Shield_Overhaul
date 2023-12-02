@@ -1,5 +1,8 @@
 package elocindev.shield_overhaul.mixin;
 
+import elocindev.shield_overhaul.registry.ServerPacketRegistry;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -46,6 +49,7 @@ public class ServerPlayerInteractionManagerMixin {
                     player.getItemCooldownManager().set(shield.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
                 }
             } else {
+                ClientPlayNetworking.send(ServerPacketRegistry.PARRY_EFFECT_PACKET, PacketByteBufs.create());
                 ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 20));
             }
         }
