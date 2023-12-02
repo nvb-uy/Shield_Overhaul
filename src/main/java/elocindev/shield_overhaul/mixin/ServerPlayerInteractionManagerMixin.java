@@ -1,8 +1,13 @@
 package elocindev.shield_overhaul.mixin;
 
+import elocindev.shield_overhaul.registry.ClientPacketRegistry;
 import elocindev.shield_overhaul.registry.ServerPacketRegistry;
 import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.util.math.ChunkPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -49,7 +54,9 @@ public class ServerPlayerInteractionManagerMixin {
                     player.getItemCooldownManager().set(shield.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
                 }
             } else {
-                ClientPlayNetworking.send(ServerPacketRegistry.PARRY_EFFECT_PACKET, PacketByteBufs.create());
+                for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)player.getWorld(), new ChunkPos((int)player.getPos().x / 16, (int)player.getPos().z / 16))) {
+                    ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()));
+                }
                 ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 20));
             }
         }
