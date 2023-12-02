@@ -39,7 +39,7 @@ public class ShieldBashC2SPacket {
                 player.velocityModified = true;
 
                 player.getItemCooldownManager().set(player.getActiveItem().getItem(), 20);
-                player.clearActiveItem();
+                //player.clearActiveItem();
                 player.setSprinting(false);
         }
     }
