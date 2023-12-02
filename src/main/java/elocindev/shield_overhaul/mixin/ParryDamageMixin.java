@@ -18,6 +18,8 @@ import net.minecraft.item.ShieldItem;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
 import net.minecraft.util.math.ChunkPos;
@@ -42,6 +44,9 @@ public class ParryDamageMixin {
 
         // Perfect parry
         if (isParrying && damageReduction >= 0.8) {
+            if (!playerEntity.getWorld().isClient()) {
+                playerEntity.getWorld().playSound(null, playerEntity.getBlockPos(), SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 1, 1);
+            }
             for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)playerEntity.getWorld(), new ChunkPos((int)playerEntity.getPos().x / 16, (int)playerEntity.getPos().z / 16))) {
                 ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(playerEntity.getUuid()));
             }

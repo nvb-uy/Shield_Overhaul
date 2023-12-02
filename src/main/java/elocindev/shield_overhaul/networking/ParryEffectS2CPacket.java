@@ -16,7 +16,10 @@ public class ParryEffectS2CPacket {
     public static void receive(MinecraftClient client, ClientPlayNetworkHandler handler, PacketByteBuf buf, PacketSender responseSender) {
         PlayerEntity target = client.world.getPlayerByUuid(buf.readUuid());
 
+        /*
+        // Todo: fix this line causing a LegacyRandomSource from multiple threads crash
         target.getWorld().playSound(target.getX(), target.getY(), target.getZ(), SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 1, 1, false);
+         */
 
         for(int i = 0; i < 5; ++i) {
             double d = 1 * 0.02D;
