@@ -2,7 +2,11 @@ package elocindev.shield_overhaul.mixin;
 
 import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.config.ConfigEntries;
+import elocindev.shield_overhaul.registry.ClientPacketRegistry;
 import elocindev.shield_overhaul.util.ShieldUtils;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.DamageUtil;
 import net.minecraft.entity.LivingEntity;
@@ -13,8 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.ShieldItem;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
 import net.minecraft.stat.Stats;
 import net.minecraft.text.Text;
+import net.minecraft.util.math.ChunkPos;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -25,8 +31,26 @@ public class ParryDamageMixin {
     private static String key = "parry_window";
     ConfigEntries config = ShieldOverhaul.CONFIG;
 
-    @Inject(method = "modifyAppliedDamage", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "damage", at = @At("HEAD"), cancellable = true)
     public void $shield_overhaul_damage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
+        if (!(((LivingEntity) (Object) this) instanceof PlayerEntity playerEntity) || !(playerEntity.getStackInHand(playerEntity.getActiveHand()).getItem() instanceof ShieldItem)) return;
+
+        ItemStack shield = playerEntity.getStackInHand(playerEntity.getActiveHand());
+        boolean isParrying = ShieldUtils.isParrying(shield, playerEntity.getWorld());
+        long window = (shield.getNbt().getLong(key) - playerEntity.getWorld().getTime());
+        float damageReduction = Math.max(0, Math.min(1, (window/config.parry_abuse_cooldown_secs)/100));
+
+        // Perfect parry
+        if (isParrying && damageReduction >= 0.8) {
+            for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)playerEntity.getWorld(), new ChunkPos((int)playerEntity.getPos().x / 16, (int)playerEntity.getPos().z / 16))) {
+                ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(playerEntity.getUuid()));
+            }
+            cir.cancel();
+        }
+    }
+
+    @Inject(method = "modifyAppliedDamage", at = @At("HEAD"), cancellable = true)
+    public void $shield_overhaul_modifyAppliedDamage(DamageSource source, float amount, CallbackInfoReturnable<Float> cir) {
         if (!(((LivingEntity) (Object) this) instanceof PlayerEntity playerEntity) || !(playerEntity.getStackInHand(playerEntity.getActiveHand()).getItem() instanceof ShieldItem)) return;
 
         ItemStack shield = playerEntity.getStackInHand(playerEntity.getActiveHand());

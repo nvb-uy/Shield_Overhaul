@@ -54,9 +54,11 @@ public class ServerPlayerInteractionManagerMixin {
                     player.getItemCooldownManager().set(shield.getItem(), (int)(config.parry_abuse_cooldown_secs * 20));
                 }
             } else {
+                /*
                 for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)player.getWorld(), new ChunkPos((int)player.getPos().x / 16, (int)player.getPos().z / 16))) {
                     ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()));
                 }
+                 */
                 ShieldUtils.setParryWindow(shield, world, (int)(config.parry_window_secs * 20));
             }
         }
