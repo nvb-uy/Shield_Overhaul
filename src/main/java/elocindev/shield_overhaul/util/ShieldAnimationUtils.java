@@ -13,12 +13,14 @@ public class ShieldAnimationUtils {
     private static SpeedModifier SPEED = new SpeedModifier(4);
 
     public static void playShieldBash(PlayerEntity user, String side) {
-        var animationContainer = ((IShieldAnimatedPlayer)user).shield_overhaul_getModAnimation();
-        KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, side.equals("right") ? "bash_right" : "bash_left"));
-        var builder = anim.mutableCopy();
-        anim = builder.build();
-        animationContainer.addModifierLast(SPEED);
-        animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL));
+        if (user != null) {
+            var animationContainer = ((IShieldAnimatedPlayer)user).shield_overhaul_getModAnimation();
+            KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, side.equals("right") ? "bash_right" : "bash_left"));
+            var builder = anim.mutableCopy();
+            anim = builder.build();
+            animationContainer.addModifierLast(SPEED);
+            animationContainer.setAnimation(new KeyframeAnimationPlayer(anim).setFirstPersonMode(FirstPersonMode.THIRD_PERSON_MODEL));
+        }
         //animationContainer.replaceAnimationWithFade(AbstractFadeModifier.standardFadeIn(0, Ease.CONSTANT), null);
     }
 }
