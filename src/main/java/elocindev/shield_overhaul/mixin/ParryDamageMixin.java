@@ -48,7 +48,9 @@ public class ParryDamageMixin {
                 playerEntity.getWorld().playSound(null, playerEntity.getBlockPos(), SoundEvents.BLOCK_ANVIL_LAND, SoundCategory.PLAYERS, 1, 1);
             }
             for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)playerEntity.getWorld(), new ChunkPos((int)playerEntity.getPos().x / 16, (int)playerEntity.getPos().z / 16))) {
-                ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(playerEntity.getUuid()));
+                if (target != null && playerEntity != null) {
+                    ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(playerEntity.getUuid()));
+                }
             }
             cir.cancel();
         }

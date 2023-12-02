@@ -18,7 +18,9 @@ public class ShieldInteraction {
             if (attack.isPressed())  {
                 if (player.isBlocking()) {
                     if (!player.getItemCooldownManager().isCoolingDown(player.getMainHandStack().getItem())) {
-                        ClientPlayNetworking.send(ServerPacketRegistry.SHIELD_BASH_PACKET, PacketByteBufs.create());
+                        if (player != null) {
+                            ClientPlayNetworking.send(ServerPacketRegistry.SHIELD_BASH_PACKET, PacketByteBufs.create());
+                        }
                     }
                 }
             }
