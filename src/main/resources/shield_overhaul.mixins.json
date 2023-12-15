@@ -9,8 +9,7 @@
     "BackgroundRendererMixin",
     "ClientPlayerEntityMixin",
     "ServerPlayerInteractionManagerMixin",
-    "ParryDamageMixin",
-    "PlayerEntityMixin"
+    "ParryDamageMixin"
   ],
   "injectors": {
     "defaultRequire": 1
