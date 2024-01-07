@@ -31,7 +31,7 @@ public abstract class BlockingMixin extends LivingEntity {
     public void $shield_overhaul_damage(DamageSource source, float amount, CallbackInfoReturnable<Boolean> cir) {
         float damageReduction = getDamageReduction((PlayerEntity)(Object) this);
         // test / example (it works)
-        damageReduction = 0.5f;
+        //damageReduction = 0.5f;
         ShieldOverhaul.LOGGER.info("Damage reduction: " + damageReduction);
 
         boolean bl = cir.getReturnValue();
@@ -46,6 +46,7 @@ public abstract class BlockingMixin extends LivingEntity {
 
             ShieldOverhaul.LOGGER.info("Initial Damage: " + amount);
             ShieldOverhaul.LOGGER.info("Damage applied: " + (amount - (amount * damageReduction)));
+            ShieldOverhaul.LOGGER.info("");
             this.applyDamage(source, amount - (amount * damageReduction));
         }
         cir.setReturnValue(bl);
@@ -56,7 +57,9 @@ public abstract class BlockingMixin extends LivingEntity {
         long window = 0;
         if (shield.getNbt() != null) {
             window = (shield.getNbt().getLong("parry_window") - playerEntity.getWorld().getTime());
+        } else {
+            ShieldOverhaul.LOGGER.info(":(");
         }
-        return Math.max(0, Math.min(1, (window/config.parry_abuse_cooldown_secs)/100));
+        return Math.max(0, Math.min(1, (window/config.parry_abuse_cooldown_secs)/10));
     }
 }
