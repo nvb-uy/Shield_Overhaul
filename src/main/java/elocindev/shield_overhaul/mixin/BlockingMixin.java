@@ -44,10 +44,14 @@ public abstract class BlockingMixin extends LivingEntity {
             }
             bl = true;
 
+            float trueDamageReduction = Math.max(0.7f, damageReduction);
+
             ShieldOverhaul.LOGGER.info("Initial Damage: " + amount);
-            ShieldOverhaul.LOGGER.info("Damage applied: " + (amount - (amount * damageReduction)));
+            ShieldOverhaul.LOGGER.info("True damage reduction: " + trueDamageReduction);
+            ShieldOverhaul.LOGGER.info("Damage applied: " + (amount - (amount * trueDamageReduction)));
             ShieldOverhaul.LOGGER.info("");
-            this.applyDamage(source, amount - (amount * damageReduction));
+
+            this.applyDamage(source, amount - (amount * trueDamageReduction));
         }
         cir.setReturnValue(bl);
     }
@@ -57,8 +61,6 @@ public abstract class BlockingMixin extends LivingEntity {
         long window = 0;
         if (shield.getNbt() != null) {
             window = (shield.getNbt().getLong("parry_window") - playerEntity.getWorld().getTime());
-        } else {
-            ShieldOverhaul.LOGGER.info(":(");
         }
         return Math.max(0, Math.min(1, (window/config.parry_abuse_cooldown_secs)/10));
     }
