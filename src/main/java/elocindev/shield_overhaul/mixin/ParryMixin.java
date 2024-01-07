@@ -3,7 +3,10 @@ package elocindev.shield_overhaul.mixin;
 import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.config.ConfigEntries;
 import elocindev.shield_overhaul.util.ShieldUtils;
+import net.minecraft.entity.LivingEntity;
+import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ShieldItem;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.network.ServerPlayerInteractionManager;
 import net.minecraft.util.ActionResult;
@@ -20,9 +23,13 @@ public abstract class ParryMixin {
 
     @Inject(method = "interactItem", at = @At("HEAD"), cancellable = true)
     public void interactItem(ServerPlayerEntity player, World world, ItemStack stack, Hand hand, CallbackInfoReturnable<ActionResult> cir) {
+        if (!(player.getStackInHand(player.getActiveHand()).getItem() instanceof ShieldItem)) return;
+
         Hand shieldHand = player.getActiveHand();
         ItemStack shield = player.getStackInHand(shieldHand);
-        ShieldOverhaul.LOGGER.info("Parry re-applied;" + (int)(config.parry_window_secs * 20 * 4));
-        ShieldUtils.setParryWindow(shield, player.getWorld(), (int)(config.parry_window_secs * 20));
+
+        ShieldOverhaul.LOGGER.info("Parry this!");
+        // Bumped this up for testing purposes but should lower it back down to 20
+        ShieldUtils.setParryWindow(shield, player.getWorld(), (int)(config.parry_window_secs * 80));
     }
 }

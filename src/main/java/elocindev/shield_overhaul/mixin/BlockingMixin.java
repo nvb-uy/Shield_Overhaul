@@ -37,7 +37,7 @@ public abstract class BlockingMixin extends LivingEntity {
         boolean bl = cir.getReturnValue();
         if (amount > 0.0f && this.blockedByShield(source)) {
             Entity entity;
-            this.damageShield(amount);
+            this.damageShield(amount - (amount * damageReduction));
             if (!source.isIn(DamageTypeTags.IS_PROJECTILE) && (entity = source.getSource()) instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity)entity;
                 this.takeShieldHit(livingEntity);
