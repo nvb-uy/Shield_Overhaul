@@ -2,7 +2,11 @@ package elocindev.shield_overhaul.mixin;
 
 import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.config.ConfigEntries;
+import elocindev.shield_overhaul.registry.ClientPacketRegistry;
 import elocindev.shield_overhaul.util.ShieldUtils;
+import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
+import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
+import net.fabricmc.fabric.api.networking.v1.ServerPlayNetworking;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
@@ -10,6 +14,11 @@ import net.minecraft.entity.damage.DamageSource;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
+import net.minecraft.server.network.ServerPlayerEntity;
+import net.minecraft.server.world.ServerWorld;
+import net.minecraft.sound.SoundCategory;
+import net.minecraft.sound.SoundEvents;
+import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
@@ -52,6 +61,15 @@ public abstract class BlockingMixin extends LivingEntity {
             ShieldOverhaul.LOGGER.info("");
 
             this.applyDamage(source, amount - (amount * trueDamageReduction));
+
+            if (trueDamageReduction >= 0.9) {
+                ShieldOverhaul.LOGGER.info("Perfect parry");
+                for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)this.getWorld(), new ChunkPos((int)this.getPos().x / 16, (int)this.getPos().z / 16))) {
+                    if (target != null && this != null) {
+                        ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(this.getUuid()));
+                    }
+                }
+            }
         }
         cir.setReturnValue(bl);
     }

@@ -28,8 +28,7 @@ public abstract class ParryMixin {
         Hand shieldHand = player.getActiveHand();
         ItemStack shield = player.getStackInHand(shieldHand);
 
-        ShieldOverhaul.LOGGER.info("Parry this!");
         // Bumped this up for testing purposes but should lower it back down to 20
-        ShieldUtils.setParryWindow(shield, player.getWorld(), (int)(config.parry_window_secs * 80));
+        ShieldUtils.setParryWindow(shield, player.getWorld(), (int)(config.parry_window_secs * 40));
     }
 }
