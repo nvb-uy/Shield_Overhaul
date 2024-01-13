@@ -36,14 +36,11 @@ public abstract class ParryMixin {
         Hand shieldHand = player.getActiveHand();
         ItemStack shield = player.getStackInHand(shieldHand);
 
-        // Bumped this up for testing purposes but should lower it back down to 20
-        /*
-        ClientPlayNetworking.send(ServerPacketRegistry.SHIELD_BASH_PACKET, PacketByteBufs.create());
-
-         */
         for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)player.getWorld(), new ChunkPos((int)player.getPos().x / 16, (int)player.getPos().z / 16))) {
             ServerPlayNetworking.send(target, ClientPacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString(shieldHand == Hand.MAIN_HAND ? "parry_right" : "parry_left"));
         }
+
+        // Bumped this up for testing purposes but should lower it back down to 20
         ShieldUtils.setParryWindow(shield, player.getWorld(), (int)(config.parry_window_secs * 40));
     }
 }
