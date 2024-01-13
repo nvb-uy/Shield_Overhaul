@@ -46,7 +46,6 @@ public abstract class BlockingMixin extends LivingEntity {
         boolean bl = cir.getReturnValue();
         if (amount > 0.0f && this.blockedByShield(source)) {
             Entity entity;
-            this.damageShield(amount - (amount * damageReduction));
             if (!source.isIn(DamageTypeTags.IS_PROJECTILE) && (entity = source.getSource()) instanceof LivingEntity) {
                 LivingEntity livingEntity = (LivingEntity)entity;
                 this.takeShieldHit(livingEntity);
@@ -64,11 +63,14 @@ public abstract class BlockingMixin extends LivingEntity {
 
             if (trueDamageReduction >= 0.9) {
                 ShieldOverhaul.LOGGER.info("Perfect parry");
+                this.damageShield(0);
                 for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)this.getWorld(), new ChunkPos((int)this.getPos().x / 16, (int)this.getPos().z / 16))) {
                     if (target != null && this != null) {
                         ServerPlayNetworking.send(target, ClientPacketRegistry.PARRY_EFFECT_S2C_PACKET, PacketByteBufs.create().writeUuid(this.getUuid()));
                     }
                 }
+            } else {
+                this.damageShield(amount - (amount * damageReduction));
             }
         }
         cir.setReturnValue(bl);
