@@ -2,8 +2,10 @@ package elocindev.shield_overhaul.networking;
 
 import elocindev.shield_overhaul.ShieldOverhaul;
 import elocindev.shield_overhaul.entity.ShieldBashEntity;
+import elocindev.shield_overhaul.registry.ClientPacketRegistry;
 import elocindev.shield_overhaul.registry.ServerPacketRegistry;
 import elocindev.shield_overhaul.util.MathUtils;
+import net.fabricmc.fabric.api.client.networking.v1.ClientPlayNetworking;
 import net.fabricmc.fabric.api.networking.v1.PacketByteBufs;
 import net.fabricmc.fabric.api.networking.v1.PacketSender;
 import net.fabricmc.fabric.api.networking.v1.PlayerLookup;
@@ -31,9 +33,9 @@ public class ShieldBashC2SPacket {
                 Hand activeHand = player.getActiveHand();
 
                 for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)player.getWorld(), new ChunkPos((int)player.getPos().x / 16, (int)player.getPos().z / 16))) {
-                    ServerPlayNetworking.send(target, ServerPacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString(activeHand == Hand.MAIN_HAND ? "right" : "left"));
+                    ServerPlayNetworking.send(target, ClientPacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString(activeHand == Hand.MAIN_HAND ? "right" : "left"));
                 }
-    
+
                 Vec3d velocityVector = MathUtils.getLookingVec(player, 1.5f);
                 player.addVelocity(velocityVector.x, velocityVector.y, velocityVector.z);
                 player.velocityModified = true;

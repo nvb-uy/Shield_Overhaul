@@ -21,9 +21,9 @@ public class ShieldOverhaul implements ModInitializer {
 	@Override
 	public void onInitialize() {
 		CONFIG = ConfigBuilder.loadConfig();
-
+		ServerPacketRegistry.registerC2SPackets();
 		EffectRegistry.initEffects();
 		EntityRegistry.reg();
-		ServerPacketRegistry.registerC2SPackets();
+
 	}
 }

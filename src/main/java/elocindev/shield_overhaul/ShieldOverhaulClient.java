@@ -12,7 +12,8 @@ import net.minecraft.util.Identifier;
 public class ShieldOverhaulClient implements ClientModInitializer {
     @Override
     public void onInitializeClient() {
-        
+        ClientPacketRegistry.registerS2CPackets();
+
         EntityRendererRegistry.register(EntityRegistry.SHIELD_BASH_ENTITY, (context) ->
                 new ProjectileEntityRenderer<ShieldBashEntity>(context) {
                 @Override
@@ -23,6 +24,6 @@ public class ShieldOverhaulClient implements ClientModInitializer {
 
         ShieldInteraction.bashingPacketRegistry();
         
-        ClientPacketRegistry.registerS2CPackets();
+
     }
 }

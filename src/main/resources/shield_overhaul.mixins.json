@@ -6,7 +6,8 @@
   "mixins": [
     "BlockingMixin",
     "ParryMixin",
-    "LivingEntityMixin"
+    "LivingEntityMixin",
+    "ClientPlayerEntityMixin"
   ],
   "injectors": {
     "defaultRequire": 1
