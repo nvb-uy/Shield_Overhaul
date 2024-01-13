@@ -1,0 +1,24 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"parry_right": {
+			"animation_length": 1,
+			"bones": {
+				"rightArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-71.12713, -60.25942, 33.26033]
+						},
+						"0.25": {
+							"vector": [-94.7908, -61.74829, 14.61921]
+						},
+						"0.5": {
+							"vector": [-72.32163, -61.37322, -2.72743]
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

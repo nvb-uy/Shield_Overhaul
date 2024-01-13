@@ -12,10 +12,10 @@ import net.minecraft.util.Identifier;
 public class ShieldAnimationUtils {
     private static SpeedModifier SPEED = new SpeedModifier(4);
 
-    public static void playShieldBash(PlayerEntity user, String side) {
+    public static void playShieldAnimation(PlayerEntity user, String animation) {
         if (user != null) {
             var animationContainer = ((IShieldAnimatedPlayer)user).shield_overhaul_getModAnimation();
-            KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, side.equals("right") ? "bash_right" : "bash_left"));
+            KeyframeAnimation anim = PlayerAnimationRegistry.getAnimation(new Identifier(ShieldOverhaul.MODID, animation));
             var builder = anim.mutableCopy();
             anim = builder.build();
             animationContainer.addModifierLast(SPEED);

@@ -33,7 +33,7 @@ public class ShieldBashC2SPacket {
                 Hand activeHand = player.getActiveHand();
 
                 for (ServerPlayerEntity target : PlayerLookup.tracking((ServerWorld)player.getWorld(), new ChunkPos((int)player.getPos().x / 16, (int)player.getPos().z / 16))) {
-                    ServerPlayNetworking.send(target, ClientPacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString(activeHand == Hand.MAIN_HAND ? "right" : "left"));
+                    ServerPlayNetworking.send(target, ClientPacketRegistry.SHIELD_BASH_ANIMATION_PACKET, PacketByteBufs.create().writeUuid(player.getUuid()).writeString(activeHand == Hand.MAIN_HAND ? "bash_right" : "bash_left"));
                 }
 
                 Vec3d velocityVector = MathUtils.getLookingVec(player, 1.5f);
