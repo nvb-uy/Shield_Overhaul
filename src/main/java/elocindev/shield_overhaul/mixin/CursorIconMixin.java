@@ -26,7 +26,7 @@ public class CursorIconMixin {
     @Shadow
     private final MinecraftClient client;
 
-    private static final Identifier SHIELD_ICONS = new Identifier(ShieldOverhaul.MODID, "textures/gui/shield.png");
+    private static final Identifier SHIELD_ICONS = new Identifier(ShieldOverhaul.MODID, "textures/gui/shield_sprites.png");
     private static final Identifier ICONS = new Identifier("textures/gui/icons.png");
 
     public CursorIconMixin(MinecraftClient client) {
@@ -35,7 +35,7 @@ public class CursorIconMixin {
 
     @Inject(at = @At("TAIL"), method = "renderCrosshair")
     private void $shield_overhaul_renderHotbar(DrawContext context, CallbackInfo ci) {
-        RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
+        //RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         if (this.client.options.getAttackIndicator().getValue() == AttackIndicator.CROSSHAIR && this.client.player.isHolding(Items.SHIELD)) {
             float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
             boolean bl = false;
@@ -49,14 +49,25 @@ public class CursorIconMixin {
             int j = this.scaledHeight / 2 - 7 + 16;
             int k = this.scaledWidth / 2 - 8;
 
+            // Top
             if (bl) {
+                context.drawTexture(SHIELD_ICONS, k - 16, j - 0, 0, 56, 16, 18);
+            } else if (f < 1.0F) {
+                int l = (int)(f * 16.0f);
+                context.drawTexture(SHIELD_ICONS, k - 16, j - 0, 0, 56, 16, 18);
+                context.drawTexture(SHIELD_ICONS, k - 16, j - 0, 0, 56, l, 18);
+            }
+        }
+        RenderSystem.defaultBlendFunc();
+    }
+
+    /*
+    if (bl) {
                 context.drawTexture(ICONS, k - 16, j - 14, 68, 94, 16, 16);
             } else if (f < 1.0F) {
                 int l = (int)(f * 17.0f);
                 context.drawTexture(ICONS, k - 16, j - 14, 36, 94, 16, 4);
                 context.drawTexture(ICONS, k - 16, j - 14, 52, 94, l, 4);
             }
-        }
-        RenderSystem.defaultBlendFunc();
-    }
+     */
 }
