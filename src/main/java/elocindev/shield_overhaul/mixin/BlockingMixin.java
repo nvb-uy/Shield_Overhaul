@@ -16,8 +16,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.tag.DamageTypeTags;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.server.world.ServerWorld;
-import net.minecraft.sound.SoundCategory;
-import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.math.ChunkPos;
 import net.minecraft.world.World;
 import org.spongepowered.asm.mixin.Mixin;

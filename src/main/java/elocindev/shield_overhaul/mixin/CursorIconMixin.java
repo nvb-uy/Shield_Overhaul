@@ -41,7 +41,8 @@ public class CursorIconMixin {
             boolean bl = false;
             if (this.client.targetedEntity != null && this.client.targetedEntity instanceof LivingEntity && f >= 1.0F) {
                 ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
-                bl = ShieldUtils.isParrying(shield, client.player.getWorld());
+                //bl = ShieldUtils.isParrying(shield, client.player.getWorld());
+                bl = this.client.player.getAttackCooldownProgressPerTick() > 5.0f;
                 bl &= this.client.targetedEntity.isAlive();
             }
 
@@ -51,8 +52,9 @@ public class CursorIconMixin {
             if (bl) {
                 context.drawTexture(ICONS, k - 16, j - 14, 68, 94, 16, 16);
             } else if (f < 1.0F) {
-                context.drawTexture(ICONS, k - 16, j - 14, 36, 94, 4, 4);
-                context.drawTexture(ICONS, k - 16, j - 14, 52, 94, 4, 4);
+                int l = (int)(f * 17.0f);
+                context.drawTexture(ICONS, k - 16, j - 14, 36, 94, 16, 4);
+                context.drawTexture(ICONS, k - 16, j - 14, 52, 94, l, 4);
             }
         }
         RenderSystem.defaultBlendFunc();
