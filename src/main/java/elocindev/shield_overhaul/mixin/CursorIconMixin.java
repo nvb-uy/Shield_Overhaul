@@ -67,7 +67,6 @@ public class CursorIconMixin {
     }
 
     private void drawParryShield(DrawContext context) {
-        float cooldownProgress = ShieldUtils.getParryProgress(this.client.player.getStackInHand(client.player.getActiveHand()), this.client.world, 40);
         boolean parrying = false;
         if (this.client != null && 1 >= 1.0F) {
             ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
@@ -79,9 +78,8 @@ public class CursorIconMixin {
 
         // Parry shield
         if (parrying) {
-            int l = (int)(cooldownProgress * 16.0f);
             context.drawTexture(SHIELD_ICONS, k + 15, j - 17, 0, 0, 16, 18);
-            context.drawTexture(SHIELD_ICONS, k + 16, j - 17, 16, 0, l, 18);
+            context.drawTexture(SHIELD_ICONS, k + 16, j - 17, 16, 0, 16, 18);
         } else {
             context.drawTexture(SHIELD_ICONS, k + 15, j - 17, 0, 0, 16, 18);
         }
