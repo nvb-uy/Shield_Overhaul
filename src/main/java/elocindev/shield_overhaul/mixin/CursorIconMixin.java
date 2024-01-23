@@ -51,11 +51,11 @@ public class CursorIconMixin {
 
             // Bash shield
             if (bl) {
-                context.drawTexture(SHIELD_ICONS, k - 16, j - 19, 0, 56, 16, 18);
+                context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 0, 56, 16, 18);
             } else if (f < 1.0F) {
                 int l = (int)(f * 16.0f);
-                //context.drawTexture(SHIELD_ICONS, k - 16, j - 0, 0, 56, 16, 18);
-                context.drawTexture(SHIELD_ICONS, k - 16, j - 19, 0, 56, 16, 18);
+                context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 0, 56, 16, 18);
+                context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 16, 56, l, 18);
             }
 
             // Parry shield
