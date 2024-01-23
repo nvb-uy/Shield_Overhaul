@@ -68,7 +68,7 @@ public class CursorIconMixin {
 
     private void drawParryShield(DrawContext context) {
         boolean parrying = false;
-        if (this.client != null && 1 >= 1.0F) {
+        if (this.client != null) {
             ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
             parrying = ShieldUtils.isParrying(client.player);
         }
