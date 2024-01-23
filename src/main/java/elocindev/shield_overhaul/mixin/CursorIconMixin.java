@@ -35,48 +35,58 @@ public class CursorIconMixin {
 
     @Inject(at = @At("TAIL"), method = "renderCrosshair")
     private void $shield_overhaul_renderHotbar(DrawContext context, CallbackInfo ci) {
-        //RenderSystem.blendFuncSeparate(GlStateManager.SrcFactor.ONE_MINUS_DST_COLOR, GlStateManager.DstFactor.ONE_MINUS_SRC_COLOR, GlStateManager.SrcFactor.ONE, GlStateManager.DstFactor.ZERO);
         if (this.client.options.getAttackIndicator().getValue() == AttackIndicator.CROSSHAIR && this.client.player.isHolding(Items.SHIELD)) {
-            float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
-            boolean bl = false;
-            if (this.client.targetedEntity != null && this.client.targetedEntity instanceof LivingEntity && f >= 1.0F) {
-                ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
-                //bl = ShieldUtils.isParrying(shield, client.player.getWorld());
-                bl = this.client.player.getAttackCooldownProgressPerTick() > 5.0f;
-                bl &= this.client.targetedEntity.isAlive();
-            }
-
-            int j = this.scaledHeight / 2 - 7 + 16;
-            int k = this.scaledWidth / 2 - 8;
-
-            // Bash shield
-            if (bl) {
-                context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 0, 56, 16, 18);
-            } else if (f < 1.0F) {
-                int l = (int)(f * 16.0f);
-                context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 0, 56, 16, 18);
-                context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 16, 56, l, 18);
-            }
-
-            // Parry shield
-            if (bl) {
-                context.drawTexture(SHIELD_ICONS, k + 15, j - 17, 0, 0, 16, 18);
-            } else if (f < 1.0F) {
-                int l = (int)(f * 16.0f);
-                context.drawTexture(SHIELD_ICONS, k + 15, j - 17, 0, 0, 16, 18);
-                context.drawTexture(SHIELD_ICONS, k + 16, j - 17, 16, 0, l, 18);
-            }
+            drawBashShield(context);
+            drawParryShield(context);
         }
         RenderSystem.defaultBlendFunc();
     }
 
-    /*
-    if (bl) {
-                context.drawTexture(ICONS, k - 16, j - 14, 68, 94, 16, 16);
-            } else if (f < 1.0F) {
-                int l = (int)(f * 17.0f);
-                context.drawTexture(ICONS, k - 16, j - 14, 36, 94, 16, 4);
-                context.drawTexture(ICONS, k - 16, j - 14, 52, 94, l, 4);
-            }
-     */
+    private void drawBashShield(DrawContext context) {
+        float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
+        boolean bl = false;
+        if (this.client.targetedEntity != null && this.client.targetedEntity instanceof LivingEntity && f >= 1.0F) {
+            ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
+            //bl = ShieldUtils.isParrying(shield, client.player.getWorld());
+            bl = this.client.player.getAttackCooldownProgressPerTick() > 5.0f;
+            bl &= this.client.targetedEntity.isAlive();
+        }
+
+        int j = this.scaledHeight / 2 - 7 + 16;
+        int k = this.scaledWidth / 2 - 8;
+
+        // Bash shield
+        if (bl) {
+            context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 0, 56, 16, 18);
+        } else if (f < 1.0F) {
+            int l = (int)(f * 16.0f);
+            context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 0, 56, 16, 18);
+            context.drawTexture(SHIELD_ICONS, k - 13, j - 19, 16, 56, l, 18);
+        }
+
+    }
+
+    private void drawParryShield(DrawContext context) {
+        float f = this.client.player.getItemCooldownManager().getCooldownProgress(Items.SHIELD, 0.0F);
+        boolean bl = false;
+        if (this.client.targetedEntity != null && this.client.targetedEntity instanceof LivingEntity && f >= 1.0F) {
+            ItemStack shield = this.client.player.getStackInHand(client.player.getActiveHand());
+            //bl = ShieldUtils.isParrying(shield, client.player.getWorld());
+            bl = this.client.player.getAttackCooldownProgressPerTick() > 5.0f;
+            bl &= this.client.targetedEntity.isAlive();
+        }
+
+        int j = this.scaledHeight / 2 - 7 + 16;
+        int k = this.scaledWidth / 2 - 8;
+
+        // Parry shield
+        if (bl) {
+            context.drawTexture(SHIELD_ICONS, k + 15, j - 17, 0, 0, 16, 18);
+        } else if (f < 1.0F) {
+            int l = (int)(f * 16.0f);
+            context.drawTexture(SHIELD_ICONS, k + 15, j - 17, 0, 0, 16, 18);
+            context.drawTexture(SHIELD_ICONS, k + 16, j - 17, 16, 0, l, 18);
+        }
+    }
+
 }
