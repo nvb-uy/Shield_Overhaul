@@ -20,13 +20,6 @@ public class ParryEffectS2CPacket {
             double d = 1 * 0.02D;
             double e = 1 * 0.02D;
             double f = 1 * 0.02D;
-            target.getWorld().addParticle(ParticleTypes.FLASH, target.getParticleX(0.25D), target.getRandomBodyY(), target.getParticleZ(0.25D), d * -5, e, f * -5);
-        }
-
-        for(int i = 0; i < 5; ++i) {
-            double d = 1 * 0.02D;
-            double e = 1 * 0.02D;
-            double f = 1 * 0.02D;
             target.getWorld().addParticle(ParticleTypes.SNOWFLAKE, target.getParticleX(1.0D), target.getRandomBodyY(), target.getParticleZ(1.0D), d, e, f);
         }
 
